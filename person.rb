@@ -2,7 +2,7 @@ class Person
   attr_accessor :name, :age
   attr_reader :id
 
-  def initialize(id, age, name = "Unknown", parent_permission = true)
+  def initialize(id, age, name = 'Unknown', parent_permission: true)
     @id = id
     @name = name
     @age = age
@@ -10,23 +10,15 @@ class Person
   end
 
   def of_age
-    if @age >= 18
-      true
-    else
-      false
-    end
+    @age >= 18
   end
 
   def can_use_services?
-    if @parent_permission == true
-        true
-    else
-        false
-    end
+    @parent_permission == true
   end
 end
 
-pe = Person.new(1, 18, "Pepe", false)
+pe = Person.new(1, 18, 'Pepe', false)
 puts pe.name
 puts pe.age
 puts pe.id
