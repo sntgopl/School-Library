@@ -26,7 +26,6 @@ class Person < Nameable
   def of_age
     @age >= 18
   end
-
 end
 
 pe = Person.new(1, 18, 'Pepe', parent_permission: false)
@@ -38,7 +37,7 @@ puts pe.can_use_services?
 
 person = Person.new(2, 22, 'maximilianus')
 puts person.correct_name
-capitalizedPerson = CapitalizeDecorator.new(person)
-puts capitalizedPerson.correct_name
-capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-puts capitalizedTrimmedPerson.correct_name
+CapitalizedPerson = CapitalizeDecorator.new(person)
+puts CapitalizedPerson.correct_name
+CapitalizedTrimmedPerson = TrimmerDecorator.new(CapitalizedPerson)
+puts CapitalizedTrimmedPerson.correct_name
