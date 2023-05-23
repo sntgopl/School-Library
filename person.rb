@@ -5,10 +5,20 @@ class Person < Nameable
   attr_reader :id
 
   def initialize(id, age, name = 'Unknown', parent_permission: true)
+    super()
     @id = id
     @name = name
     @age = age
     @parent_permission = parent_permission
+  end
+
+  def can_use_services?
+    of_age || @parent_permission
+  end
+
+  # decorator pattern
+  def correct_name
+    @name
   end
 
   private
@@ -17,20 +27,18 @@ class Person < Nameable
     @age >= 18
   end
 
-  public
-
-  def can_use_services?
-    of_age || @parent_permission
-  end
-
-  def correct_name
-    @name
-  end
 end
 
-pe = Person.new(1, 18, 'Pepe', false)
+pe = Person.new(1, 18, 'Pepe', parent_permission: false)
 puts pe.name
 puts pe.age
 puts pe.id
-puts pe.of_age
+puts pe.send(:of_age)
 puts pe.can_use_services?
+
+person = Person.new(2, 22, 'maximilianus')
+puts person.correct_name
+capitalizedPerson = CapitalizeDecorator.new(person)
+puts capitalizedPerson.correct_name
+capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
+puts capitalizedTrimmedPerson.correct_name
